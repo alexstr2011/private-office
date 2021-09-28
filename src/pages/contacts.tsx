@@ -1,9 +1,12 @@
 import React from "react";
+import ContactsTable from "../components/contacts-table";
 
-const Contracts = () => {
+const Contacts = () => {
     return (
-        <div>Contracts</div>
+        <div>Contacts
+            <ContactsTable/>
+        </div>
     );
 }
 
-export default Contracts;
+export default Contacts;

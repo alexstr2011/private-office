@@ -9,7 +9,7 @@ const Login = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
-    
+
     return (
         <form>
             <label>Login:
