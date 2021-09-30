@@ -13,7 +13,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(AuthActionCreators.login(credentials));
+        dispatch(AuthActionCreators.Login(credentials));
     }
 
 
@@ -22,10 +22,9 @@ const Login = () => {
 
     return (
         <form onSubmit={submitHandler}>
-            {/*<button onClick={() => dispatch(AuthActionCreators.setLogin('12345'))}>setLogin</button>
-            <button onClick={() => dispatch(AuthActionCreators.setAuth(true))}>setAuth</button>
-            <button onClick={() => dispatch(AuthActionCreators.setError('Error1'))}>setError</button>
-            <button onClick={() => dispatch(AuthActionCreators.setLoading())}>setLoading</button>*/}
+            {/*<button onClick={() => dispatch(AuthActionCreators.authStart())}>authStart</button>
+            <button onClick={() => dispatch(AuthActionCreators.authSuccess('name1'))}>authSuccess</button>
+            <button onClick={() => dispatch(AuthActionCreators.authError('error1'))}>authError</button>*/}
 
             <label>Login:
                 <input

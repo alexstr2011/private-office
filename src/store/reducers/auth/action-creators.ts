@@ -1,25 +1,24 @@
-import {AuthActionsEnum, ISetAuthAction, ISetErrorAction, ISetLoadingAction, ISetLoginAction} from "./types";
+import {AuthActionsEnum, IAuthErrorAction, IAuthLogout, IAuthStartAction, IAuthSuccessAction,} from "./types";
 import {AppDispatch} from "../../index";
 import {LOGIN_URL} from "../../../api";
 
 export const AuthActionCreators = {
-    setLogin: (login: string): ISetLoginAction => ({
-        type: AuthActionsEnum.SET_LOGIN,
-        payload: login
+    Start: (): IAuthStartAction => ({
+        type: AuthActionsEnum.START
     }),
-    setLoading: (): ISetLoadingAction => ({
-        type: AuthActionsEnum.SET_LOADING
+    Success: (name: string): IAuthSuccessAction => ({
+        type: AuthActionsEnum.SUCCESS,
+        payload: name
     }),
-    setAuth: (auth: boolean): ISetAuthAction => ({
-        type: AuthActionsEnum.SET_AUTH,
-        payload: auth
-    }),
-    setError: (error: string): ISetErrorAction => ({
-        type: AuthActionsEnum.SET_ERROR,
+    Error: (error: string): IAuthErrorAction => ({
+        type: AuthActionsEnum.ERROR,
         payload: error
     }),
-    login: (credentials: {login: string, password: string} ) => (dispatch: AppDispatch) => {
-        dispatch(AuthActionCreators.setLoading());
+    Logout: (): IAuthLogout => ({
+        type: AuthActionsEnum.LOGOUT
+    }),
+    Login: (credentials: {login: string, password: string} ) => (dispatch: AppDispatch) => {
+        dispatch(AuthActionCreators.Start());
 
         fetch(LOGIN_URL, {
             method: 'POST',
@@ -31,15 +30,14 @@ export const AuthActionCreators = {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Failed getting data from server');
+                throw new Error('Login failed');
             }
         })
             .then((response) => {
-                dispatch(AuthActionCreators.setAuth(true));
-                dispatch(AuthActionCreators.setLogin(response.login));
+                dispatch(AuthActionCreators.Success(response.login));
             })
             .catch((error) => {
-                dispatch(AuthActionCreators.setError(error.message));
+                dispatch(AuthActionCreators.Error(error.message));
             });
     }
 }

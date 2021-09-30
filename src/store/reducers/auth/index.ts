@@ -1,7 +1,7 @@
 import {AuthActions, AuthActionsEnum, IAuthState} from "./types";
 
 const initialState: IAuthState = {
-    login: '',
+    name: '',
     isAuth: false,
     isLoading: false,
     error: ''
@@ -9,21 +9,21 @@ const initialState: IAuthState = {
 
 const authReducer = (state = initialState, action: AuthActions): IAuthState => {
     switch (action.type) {
-        case AuthActionsEnum.SET_LOGIN:
+        case AuthActionsEnum.START:
             return {
-                ...state, login: action.payload
+                ...state, name: '', isAuth: false, isLoading: true, error: ''
             }
-        case AuthActionsEnum.SET_AUTH:
+        case AuthActionsEnum.SUCCESS:
             return  {
-                ...state, isAuth: action.payload, isLoading: false, error: ''
+                ...state, name: action.payload, isAuth: true, isLoading: false
             }
-        case AuthActionsEnum.SET_LOADING:
+        case AuthActionsEnum.ERROR:
             return {
-                ...state, isLoading: true, error: ''
+                ...state, isLoading: false, error: action.payload
             }
-        case AuthActionsEnum.SET_ERROR:
+        case AuthActionsEnum.LOGOUT:
             return  {
-                ...state, error: action.payload, isLoading: false, login: '', isAuth: false
+                ...state, name: '', isAuth: false
             }
         default:
             return state;

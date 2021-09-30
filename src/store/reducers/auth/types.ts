@@ -1,38 +1,37 @@
 export interface IAuthState {
-    login: string;
+    name: string;
     isLoading: boolean;
     isAuth: boolean;
     error: string;
 }
 
 export enum AuthActionsEnum {
-    SET_LOGIN = 'SET_LOGIN',
-    SET_LOADING = 'SET_LOADING',
-    SET_AUTH = 'SET_AUTH',
-    SET_ERROR = 'SET_ERROR'
+    START = 'START',
+    SUCCESS = 'SUCCESS',
+    ERROR = 'ERROR',
+    LOGOUT = 'LOGOUT'
 }
 
-export interface ISetLoginAction {
-    type: AuthActionsEnum.SET_LOGIN;
+export interface IAuthStartAction {
+    type: AuthActionsEnum.START;
+}
+
+export interface IAuthSuccessAction {
+    type: AuthActionsEnum.SUCCESS;
     payload: string;
 }
 
-export interface ISetLoadingAction {
-    type: AuthActionsEnum.SET_LOADING;
-}
-
-export interface ISetAuthAction {
-    type: AuthActionsEnum.SET_AUTH;
-    payload: boolean;
-}
-
-export interface ISetErrorAction {
-    type: AuthActionsEnum.SET_ERROR;
+export interface IAuthErrorAction {
+    type: AuthActionsEnum.ERROR;
     payload: string;
+}
+
+export interface IAuthLogout {
+    type: AuthActionsEnum.LOGOUT;
 }
 
 export type AuthActions =
-    ISetLoginAction |
-    ISetLoadingAction |
-    ISetAuthAction |
-    ISetErrorAction;
+    IAuthStartAction |
+    IAuthSuccessAction |
+    IAuthErrorAction |
+    IAuthLogout;
