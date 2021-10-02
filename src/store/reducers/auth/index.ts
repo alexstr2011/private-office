@@ -28,6 +28,6 @@ const authReducer = (state = initialState, action: AuthActions): IAuthState => {
         default:
             return state;
     }
-}
+};
 
 export default authReducer;
