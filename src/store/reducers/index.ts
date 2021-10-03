@@ -1,7 +1,9 @@
 import auth from "./auth";
 import contacts from "./contacts"
 
-export default {
+const reducers = {
     auth,
     contacts
 }
+
+export default reducers;
