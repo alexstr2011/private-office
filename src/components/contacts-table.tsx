@@ -4,22 +4,28 @@ import ContactItem from "./contact-item";
 
 interface IContactsTableProps {
     contacts: Array<IContact>;
+    editHandler: (id: number) => void;
     removeHandler: (id: number) => void;
 }
 
-const ContactsTable: FC<IContactsTableProps> = ({contacts, removeHandler}) => {
-    const removeClickHandler = (e: React.MouseEvent<HTMLTableElement>) => {
+const ContactsTable: FC<IContactsTableProps> = ({contacts, editHandler, removeHandler}) => {
+    const clickHandler = (e: React.MouseEvent<HTMLTableElement>) => {
         if (e.target instanceof HTMLElement) {
-            const id = Number(e.target.dataset.id);
-            if (!isNaN(id)) {
-                removeHandler(id);
+            const dataSet = e.target.dataset;
+            const editId = Number(dataSet.editId);
+            const removeId = Number(dataSet.removeId);
+            if (!isNaN(editId) && editId) {
+                console.log(editId);
+                editHandler(editId);
+            } else if (!isNaN(removeId) && removeId) {
+                removeHandler(removeId);
             }
         }
     }
 
     return (
         <div>
-            <table onClick={removeClickHandler}>
+            <table onClick={clickHandler}>
                 <thead>
                 <tr>
                     <th>Number</th>

@@ -1,15 +1,23 @@
-import React from "react";
-import {contactTypesArray, ContactTypesEnum} from "../store/reducers/contacts/types";
+import React, {FC} from "react";
+import {contactTypesArray, ContactTypesEnum, IContact} from "../store/reducers/contacts/types";
 import {useDispatch} from "react-redux";
 import {allActionCreators} from "../store/reducers/action-creators";
 
-const ContactForm = () => {
+interface IContactFormProps {
+    closeModal: () => void;
+    removeEditContact: () => void;
+    editContact?: IContact
+}
+
+const ContactForm: FC<IContactFormProps> = ({closeModal, editContact, removeEditContact}) => {
+    console.log(editContact);
+
     const dispatch = useDispatch();
 
     const [contact, setContact] = React.useState({
-        name: '',
-        type: contactTypesArray[0].key,
-        value: ''
+        name: editContact ? editContact.name : '',
+        type: editContact ? editContact.type : contactTypesArray[0].key,
+        value: editContact ? editContact.value : ''
     });
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
         const target = e.currentTarget;
@@ -21,12 +29,20 @@ const ContactForm = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        dispatch(allActionCreators.ContactsActionCreators.Add({
-            id: Date.now(),
+        const newContact = {
+            id: editContact ? editContact.id : Date.now(),
             name: contact.name,
             type: (contact.type as ContactTypesEnum),
             value: contact.value
-        }));
+        };
+
+        if (editContact) {
+            removeEditContact();
+            dispatch(allActionCreators.ContactsActionCreators.Change(editContact.id, newContact));
+        } else {
+            dispatch(allActionCreators.ContactsActionCreators.Add(newContact));
+        }
+        closeModal();
     }
 
     let inputValueType = 'text';
@@ -53,7 +69,7 @@ const ContactForm = () => {
                     value={contact.type}
                 >
                     {
-                        contactTypesArray.map(item => <option value={item.key}>{item.value}</option>)
+                        contactTypesArray.map(item => <option value={item.key} key={item.key}>{item.value}</option>)
                     }
                 </select>
             </label>
@@ -65,7 +81,7 @@ const ContactForm = () => {
                     value={contact.value}
                     required />
             </label>
-            <button>Add</button>
+            <button>Save</button>
         </form>
     );
 }

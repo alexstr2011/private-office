@@ -18,7 +18,7 @@ const Login = () => {
 
 
     const store = useSelector<RootState>(state => state.auth);
-    console.log(store);
+    //console.log(store);
 
     return (
         <form onSubmit={submitHandler}>

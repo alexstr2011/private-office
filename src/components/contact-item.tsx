@@ -22,7 +22,10 @@ const ContactItem: FC<IContactItemProps> = ({contact, number}) => {
                 {contact.value}
             </td>
             <td>
-                <button data-id={contact.id}>Remove</button>
+                <button data-edit-id={contact.id}>Edit</button>
+            </td>
+            <td>
+                <button data-remove-id={contact.id}>Remove</button>
             </td>
         </tr>
     );
