@@ -4,10 +4,16 @@ export enum ContactTypesEnum {
     SITE = 'SITE'
 }
 
+export const contactTypesArray: {
+    key: string;
+    value: string;
+}[] = Object.entries(ContactTypesEnum)
+    .map(([key, value]) => ({key, value}));
+
 export interface IContact {
     id: number;
     name: string;
-    type: ContactTypesEnum;
+    type?: ContactTypesEnum;
     value: string;
 }
 
