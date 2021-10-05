@@ -4,12 +4,11 @@ import {useDispatch} from "react-redux";
 import {allActionCreators} from "../store/reducers/action-creators";
 
 interface IContactFormProps {
-    closeModal: () => void;
-    removeEditContact: () => void;
+    afterSubmitContact: () => void;
     editContact?: IContact
 }
 
-const ContactForm: FC<IContactFormProps> = ({closeModal, editContact, removeEditContact}) => {
+const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) => {
     console.log(editContact);
 
     const dispatch = useDispatch();
@@ -37,12 +36,11 @@ const ContactForm: FC<IContactFormProps> = ({closeModal, editContact, removeEdit
         };
 
         if (editContact) {
-            removeEditContact();
             dispatch(allActionCreators.ContactsActionCreators.Change(editContact.id, newContact));
         } else {
             dispatch(allActionCreators.ContactsActionCreators.Add(newContact));
         }
-        closeModal();
+        afterSubmitContact();
     }
 
     let inputValueType = 'text';
@@ -60,6 +58,7 @@ const ContactForm: FC<IContactFormProps> = ({closeModal, editContact, removeEdit
                     name='name'
                     onChange={changeHandler}
                     value={contact.name}
+                    placeholder='Name'
                     required />
             </label>
             <label>Type:
@@ -79,6 +78,7 @@ const ContactForm: FC<IContactFormProps> = ({closeModal, editContact, removeEdit
                     name='value'
                     onChange={changeHandler}
                     value={contact.value}
+                    placeholder='Value'
                     required />
             </label>
             <button>Save</button>

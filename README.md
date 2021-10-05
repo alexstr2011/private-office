@@ -1,3 +1,5 @@
+json-server --watch mock-api/db.json --port 3001 --middlewares mock-api/login-middleware.js
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -20,9 +20,11 @@ const Contacts = () => {
         setEditContact(contacts.find(item => item.id === id));
         setIsModalShown(true);
     };
-    const removeEditContact = () => {
+
+    const afterSubmitContact = () => {
         setEditContact(undefined);
-    };
+        setIsModalShown(false)
+    }
 
     const closeModal = () => {
         setIsModalShown(false)
@@ -34,9 +36,8 @@ const Contacts = () => {
             {isModalShown && (
                 <Modal closeModal={closeModal}>
                     <ContactForm
-                        closeModal={closeModal}
+                        afterSubmitContact={afterSubmitContact}
                         editContact={editContact}
-                        removeEditContact={removeEditContact}
                     />
                 </Modal>
             )}
