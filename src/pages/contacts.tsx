@@ -42,6 +42,7 @@ const Contacts = () => {
                 </Modal>
             )}
             <button onClick={() => setIsModalShown(true)}>Add new contact</button>
+            <button onClick={() => dispatch(allActionCreators.AuthActionCreators.Logout())}>Logout</button>
         </div>
     );
 }

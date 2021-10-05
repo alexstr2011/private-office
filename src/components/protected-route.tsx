@@ -4,14 +4,18 @@ import {useTypedSelector} from "../store/hooks/useTypedSelector";
 
 const ProtectedRoute: FC<RouteProps> = ({children, ...rest}) => {
     const isAuth = useTypedSelector(state => state.auth.isAuth);
+    console.log('isAuth', isAuth);
     return (
         <Route
             {...rest}
-            render = {() => isAuth ? children : <Redirect to={{pathname: 'login'}}/>
-        }
+            render={
+                ({location}) =>
+                    isAuth ?
+                    children :
+                    <Redirect to={{pathname: '/login', state: {from: location}}}/>
+            }
         />
     );
-
 }
 
 export default ProtectedRoute;

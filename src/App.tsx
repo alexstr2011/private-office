@@ -1,13 +1,19 @@
 import React from 'react';
 import Login from "./pages/login";
-import Contracts from "./pages/contacts";
+import Contacts from "./pages/contacts";
+import {Route, Switch} from "react-router-dom";
+import ProtectedRoute from "./components/protected-route";
 
 function App() {
     return (
-        <div>
-            <Login/>
-            <Contracts/>
-        </div>
+        <Switch>
+            <Route path='/login' exact>
+                <Login/>
+            </Route>
+            <ProtectedRoute path='/' exact>
+                <Contacts/>
+            </ProtectedRoute>
+        </Switch>
     );
 }
 
