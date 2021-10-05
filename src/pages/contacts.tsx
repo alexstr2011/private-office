@@ -12,6 +12,11 @@ const Contacts = () => {
     const dispatch = useDispatch();
     const [isModalShown, setIsModalShown] = React.useState(false);
     const [editContact, setEditContact] = React.useState<IContact|undefined>();
+    const [search, setSearch] = React.useState('');
+
+    const filteredContacts = React.useMemo(() => {
+        return contacts.filter(item => item.value.includes(search) || item.name.includes(search));
+    }, [contacts, search]);
 
     const removeHandler = (id: number) => {
         dispatch(allActionCreators.ContactsActionCreators.Remove(id));
@@ -32,7 +37,15 @@ const Contacts = () => {
 
     return (
         <div>Contacts
-            <ContactsTable contacts={contacts} editHandler={editHandler} removeHandler={removeHandler} />
+            <label>Search:
+                <input
+                    type='text'
+                    placeholder='Search...'
+                    value = {search}
+                    onChange={(e) => setSearch(e.currentTarget.value)}
+                />
+            </label>
+            <ContactsTable contacts={filteredContacts} editHandler={editHandler} removeHandler={removeHandler} />
             {isModalShown && (
                 <Modal closeModal={closeModal}>
                     <ContactForm
