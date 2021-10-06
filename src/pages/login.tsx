@@ -4,6 +4,7 @@ import {useTypedSelector} from "../store/hooks/useTypedSelector";
 import {Redirect} from "react-router-dom";
 import {allActionCreators} from "../store/reducers/action-creators";
 import StyledButton from "../components/styled-button";
+import styles from "./login.module.css";
 
 const Login = () => {
     const [credentials, setCredentials] = React.useState({login: '', password: ''});
@@ -23,8 +24,10 @@ const Login = () => {
             ?
             <Redirect to='/'/>
             :
-            <form onSubmit={submitHandler}>
-                <label>Login:
+            <form onSubmit={submitHandler} className={styles.form}>
+                <h1>Account login</h1>
+                <label>
+                    <span>Login:</span>
                     <input
                         type='text'
                         name='login'
@@ -32,7 +35,8 @@ const Login = () => {
                         value={credentials.login}
                         required/>
                 </label>
-                <label>Password:
+                <label>
+                    <span>Password:</span>
                     <input
                         type='password'
                         name='password'
@@ -40,13 +44,15 @@ const Login = () => {
                         value={credentials.password}
                         required/>
                 </label>
-                <StyledButton>Log in</StyledButton>
-                {
-                    isLoading && (<p>Loading...</p>)
-                }
-                {
-                    error && (<p>{error}</p>)
-                }
+                <div className={styles.status}>
+                    <StyledButton>Log in</StyledButton>
+                    {
+                        isLoading && (<p>Loading...</p>)
+                    }
+                    {
+                        error && (<p className={styles.error}>{error}</p>)
+                    }
+                </div>
             </form>
     );
 }
