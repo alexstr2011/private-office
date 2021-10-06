@@ -11,12 +11,12 @@ https://github.com/typicode/json-server
 
 ### Запуск:
 
-####Запускаем моковый сервер для авторизации:
+Запускаем моковый сервер для авторизации:
 `json-server --watch mock-api/db.json --port 3001 --middlewares mock-api/login-middleware.js`
 
-####Запускаем проект:
+Запускаем проект:
 `npm run start`
 
-####Авторизуемся:
+Авторизуемся:
 Логин (латинское): `a`
 Пароль: `1`
