@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {IContact} from "../store/reducers/contacts/types";
 import ContactItem from "./contact-item";
+import styles from './contacts-table.module.css';
 
 interface IContactsTableProps {
     contacts: Array<IContact>;
@@ -15,7 +16,6 @@ const ContactsTable: FC<IContactsTableProps> = ({contacts, editHandler, removeHa
             const editId = Number(dataSet.editId);
             const removeId = Number(dataSet.removeId);
             if (!isNaN(editId) && editId) {
-                console.log(editId);
                 editHandler(editId);
             } else if (!isNaN(removeId) && removeId) {
                 removeHandler(removeId);
@@ -24,25 +24,24 @@ const ContactsTable: FC<IContactsTableProps> = ({contacts, editHandler, removeHa
     }
 
     return (
-        <div>
-            <table onClick={clickHandler}>
-                <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Value</th>
-                    <th>Remove</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    contacts.map((item, index) =>
-                        <ContactItem contact={item} key={item.id} number={index + 1}/>)
-                }
-                </tbody>
-            </table>
-        </div>
+        <table onClick={clickHandler} className={styles.table}>
+            <thead>
+            <tr>
+                <th className={styles.techColumn}>Number</th>
+                <th>Name</th>
+                <th className={styles.techColumn}>Type</th>
+                <th>Value</th>
+                <th className={styles.techColumn}>Edit</th>
+                <th className={styles.techColumn}>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+                contacts.map((item, index) =>
+                    <ContactItem contact={item} key={item.id} number={index + 1}/>)
+            }
+            </tbody>
+        </table>
     );
 }
 

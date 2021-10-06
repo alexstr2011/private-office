@@ -4,7 +4,6 @@ import {useTypedSelector} from "../store/hooks/useTypedSelector";
 
 const ProtectedRoute: FC<RouteProps> = ({children, ...rest}) => {
     const isAuth = useTypedSelector(state => state.auth.isAuth);
-    console.log('isAuth', isAuth);
     return (
         <Route
             {...rest}

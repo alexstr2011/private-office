@@ -6,6 +6,8 @@ import {allActionCreators} from "../store/reducers/action-creators";
 import Modal from "../components/modal";
 import ContactForm from "../components/contact-form";
 import {IContact} from "../store/reducers/contacts/types";
+import StyledButton from "../components/styled-button";
+import styles from './contacts.module.css';
 
 const Contacts = () => {
     const contacts = useTypedSelector(state => state.contacts.contacts);
@@ -36,12 +38,18 @@ const Contacts = () => {
     };
 
     return (
-        <div>Contacts
-            <label>Search:
+        <div className={styles.wrapper}>
+            <header className={styles.header}>
+                <h1>Contacts</h1>
+                <StyledButton onClick={() => dispatch(allActionCreators.AuthActionCreators.Logout())}>
+                    Logout
+                </StyledButton>
+            </header>
+            <label className={styles.search}>Search:
                 <input
                     type='text'
                     placeholder='Search...'
-                    value = {search}
+                    value={search}
                     onChange={(e) => setSearch(e.currentTarget.value)}
                 />
             </label>
@@ -54,8 +62,9 @@ const Contacts = () => {
                     />
                 </Modal>
             )}
-            <button onClick={() => setIsModalShown(true)}>Add new contact</button>
-            <button onClick={() => dispatch(allActionCreators.AuthActionCreators.Logout())}>Logout</button>
+            <div className={styles.add}>
+                <StyledButton onClick={() => setIsModalShown(true)}>Add new contact</StyledButton>
+            </div>
         </div>
     );
 }

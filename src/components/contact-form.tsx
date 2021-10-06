@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {contactTypesArray, ContactTypesEnum, IContact} from "../store/reducers/contacts/types";
 import {useDispatch} from "react-redux";
 import {allActionCreators} from "../store/reducers/action-creators";
+import StyledButton from "./styled-button";
 
 interface IContactFormProps {
     afterSubmitContact: () => void;
@@ -9,8 +10,6 @@ interface IContactFormProps {
 }
 
 const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) => {
-    console.log(editContact);
-
     const dispatch = useDispatch();
 
     const [contact, setContact] = React.useState({
@@ -81,7 +80,7 @@ const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) =
                     placeholder='Value'
                     required />
             </label>
-            <button>Save</button>
+            <StyledButton>Save</StyledButton>
         </form>
     );
 }

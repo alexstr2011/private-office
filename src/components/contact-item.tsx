@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import {IContact} from "../store/reducers/contacts/types";
+import StyledButton from "./styled-button";
 
 interface IContactItemProps {
     contact: IContact;
@@ -22,10 +23,10 @@ const ContactItem: FC<IContactItemProps> = ({contact, number}) => {
                 {contact.value}
             </td>
             <td>
-                <button data-edit-id={contact.id}>Edit</button>
+                <StyledButton data-edit-id={contact.id}>Edit</StyledButton>
             </td>
             <td>
-                <button data-remove-id={contact.id}>Remove</button>
+                <StyledButton data-remove-id={contact.id}>Remove</StyledButton>
             </td>
         </tr>
     );

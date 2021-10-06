@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import ModalOverlay from './modal-overlay';
+import StyledButton from "./styled-button";
 
 interface IModalProps {
     closeModal: () => void;
@@ -30,7 +31,7 @@ const Modal: FC<IModalProps> = ({closeModal, children}) => {
                 <>
                     <section className={styles.modal}>
                         <header className={styles.header}>
-                            <button onClick={closeModal}>Close</button>
+                            <StyledButton onClick={closeModal}>Close</StyledButton>
                         </header>
                         {children}
                     </section>
