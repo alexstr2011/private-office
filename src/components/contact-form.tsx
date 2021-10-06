@@ -3,6 +3,7 @@ import {contactTypesArray, ContactTypesEnum, IContact} from "../store/reducers/c
 import {useDispatch} from "react-redux";
 import {allActionCreators} from "../store/reducers/action-creators";
 import StyledButton from "./styled-button";
+import styles from "./contact-form.module.css"
 
 interface IContactFormProps {
     afterSubmitContact: () => void;
@@ -50,8 +51,9 @@ const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) =
     }
 
     return (
-        <form onSubmit={submitHandler}>
-            <label>Name:
+        <form onSubmit={submitHandler} className={styles.form}>
+            <label>
+                <span>Name:</span>
                 <input
                     type='text'
                     name='name'
@@ -60,7 +62,8 @@ const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) =
                     placeholder='Name'
                     required />
             </label>
-            <label>Type:
+            <label>
+                <span>Type:</span>
                 <select
                     onChange={changeHandler}
                     name='type'
@@ -71,7 +74,8 @@ const ContactForm: FC<IContactFormProps> = ({afterSubmitContact, editContact}) =
                     }
                 </select>
             </label>
-            <label>Value:
+            <label>
+                <span>Value:</span>
                 <input
                     type={inputValueType}
                     name='value'
